@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/1_init_20241110.sql
+  - include:
+      file: db/changelog/2_add_user_role_20241116.sql
