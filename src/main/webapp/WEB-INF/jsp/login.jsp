@@ -25,13 +25,13 @@
         </div>
 
         <form:form action="/login" method="post" modelattribute="user">
-            <label for="username">username</label>
-            <input type="text" id="username" name="username" required /><br>
+            <label class="form-label" for="username">username</label>
+            <input class="form-control" type="text" id="username" name="username" required /><br>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required /><br><br>
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password" required /><br><br>
 
-            <button type="submit" style="margin-bottom: 10px;">Login</button>
+            <button class="btn btn-info" type="submit" style="margin-bottom: 10px;">Login</button>
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form:form>

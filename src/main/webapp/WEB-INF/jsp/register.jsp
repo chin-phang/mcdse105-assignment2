@@ -25,16 +25,16 @@
         </div>
 
         <form:form action="/register" modelatrribute="user" method="post">
-            <label for="username">Username</label><br>
+            <label class="form-label" for="username">Username</label><br>
             <input class="form-control" type="text" id="username" name="username" required /><br>
 
-            <label for="email">Email</label><br>
+            <label class="form-label" for="email">Email</label><br>
             <input class="form-control" type="email" id="email" name="email" required /><br>
 
-            <label for="password">Password</label><br>
+            <label class="form-label" for="password">Password</label><br>
             <input class="form-control" type="password" id="password" name="password" required /><br>
 
-            <label for="cpassword">Confirm password</label><br>
+            <label class="form-label" for="cpassword">Confirm password</label><br>
             <input class="form-control" type="password" id="cpassword" name="cpassword" required /><br>
 
             <button class="btn btn-info" type="submit" style="margin-top: 20px;">Register</button>

@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: assignment1
+    name: assignment2
 
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

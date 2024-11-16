@@ -1,5 +1,6 @@
 package org.mcdse105.assignment2.config;
 
+import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -7,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -17,20 +16,21 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .cors(withDefaults())
             .csrf(csrf -> csrf
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/static/**")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/products")).hasAnyAuthority("ADMIN", "USER")
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/about")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/contact")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/login")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/register")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.POST, "/register")).permitAll()
+                    .requestMatchers(HttpMethod.GET, "/").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/static/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/products").hasAnyAuthority("ADMIN", "USER")
+                    .requestMatchers(HttpMethod.GET, "/about").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/contact").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/login").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/register").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .anyRequest().authenticated())
             .formLogin(login -> login
                     .loginPage("/login")
@@ -44,10 +44,5 @@ public class SecurityConfiguration {
                     .permitAll());
 
         return http.build();
-    }
-
-    @Bean
-    MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
-        return new MvcRequestMatcher.Builder(introspector);
     }
 }
