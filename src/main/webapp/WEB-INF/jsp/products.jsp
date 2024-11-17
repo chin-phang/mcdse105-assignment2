@@ -16,7 +16,7 @@
             <form:form action="${pageContext.request.contextPath}/logout" method="POST">
                 <button class="btn btn-outline-secondary" type="submit">Logout</button>
             </form:form>
-        </div>
+        </section>
 
         <section class="table">
             <h1>KA Products</h1>

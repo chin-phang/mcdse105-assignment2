@@ -35,10 +35,14 @@ public class SecurityConfiguration {
             .formLogin(login -> login
                     .loginPage("/login")
                     .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/products"))
+                    .usernameParameter("username")
+                    .defaultSuccessUrl("/products")
+                    .permitAll())
             .logout(logout -> logout
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/"));
+                    .invalidateHttpSession(true)
+                    .logoutSuccessUrl("/")
+                    .permitAll());
 
         return http.build();
     }
